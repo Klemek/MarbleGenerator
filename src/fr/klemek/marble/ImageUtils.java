@@ -35,8 +35,8 @@ final class ImageUtils {
 
         int linePadding = (width * 3) % 4;
         if (linePadding > 0) {
-            byte[] tail = new byte[4-linePadding];
-            tail[tail.length-1] = (byte) 255;
+            byte[] tail = new byte[4 - linePadding];
+            tail[tail.length - 1] = (byte) 255;
             data = Utils.interlaceArrays(data, tail, width * 3, height);
         }
         return data;
@@ -64,7 +64,7 @@ final class ImageUtils {
         return header;
     }
 
-    static boolean saveBmpFile(byte[] data, File bmpFile){
+    static boolean saveBmpFile(byte[] data, File bmpFile) {
         try (FileOutputStream fos = new FileOutputStream(bmpFile.getPath())) {
             fos.write(data);
             return true;
@@ -74,7 +74,7 @@ final class ImageUtils {
         }
     }
 
-    static boolean convertBmpToJpg(File bmpFile, File jpgFile){
+    static boolean convertBmpToJpg(File bmpFile, File jpgFile) {
         try {
             BufferedImage inputImage = ImageIO.read(bmpFile);
             ImageIO.write(inputImage, "JPG", jpgFile);

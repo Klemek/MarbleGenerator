@@ -37,55 +37,55 @@ final class Utils {
         return out;
     }
 
-    static void translateUnsigned(byte[] data){
-        for(int i = 0; i < data.length; i++){
+    static void translateUnsigned(byte[] data) {
+        for (int i = 0; i < data.length; i++) {
             data[i] = (byte) (data[i] - Byte.MIN_VALUE);
         }
     }
 
-    static byte[] interlaceArrays(byte[] data, byte[] added, int size, int times){
-        byte[] out = new byte[data.length + added.length*times];
-        int size2 = size+added.length;
-        for(int i = 0; i < times; i++){
-            writeArray(out, data, size2*i, size2*i+size, size*i);
-            writeArray(out, added, size2*i+size, size2*(i+1), 0);
+    static byte[] interlaceArrays(byte[] data, byte[] added, int size, int times) {
+        byte[] out = new byte[data.length + added.length * times];
+        int size2 = size + added.length;
+        for (int i = 0; i < times; i++) {
+            writeArray(out, data, size2 * i, size2 * i + size, size * i);
+            writeArray(out, added, size2 * i + size, size2 * (i + 1), 0);
         }
-        writeArray(out, data, size2*times, out.length-size2*times, size*times);
+        writeArray(out, data, size2 * times, out.length - size2 * times, size * times);
         return out;
     }
 
-    static void writeArray(byte[] out, byte[] data, int start, int stop, int padding){
-        for(int i = 0; i < Math.min(stop, out.length)-start; i++){
-            out[i+start] = data[i+padding];
+    static void writeArray(byte[] out, byte[] data, int start, int stop, int padding) {
+        for (int i = 0; i < Math.min(stop, out.length) - start; i++) {
+            out[i + start] = data[i + padding];
         }
     }
 
-    static void writeArray(byte[] out, byte[] data, int start, int padding){
-        writeArray(out, data, start, start+data.length-padding, padding);
+    static void writeArray(byte[] out, byte[] data, int start, int padding) {
+        writeArray(out, data, start, start + data.length - padding, padding);
     }
 
-    static void writeArray(byte[] out, byte[] data, int start){
+    static void writeArray(byte[] out, byte[] data, int start) {
         writeArray(out, data, start, 0);
     }
 
-    static byte[] num2bytes(int number, int nbyte){
+    static byte[] num2bytes(int number, int nbyte) {
         byte[] b = new byte[nbyte];
-        for(int i = 0; i < nbyte; i++){
-            b[i] = (byte)(number%256);
-            number = number/256;
+        for (int i = 0; i < nbyte; i++) {
+            b[i] = (byte) (number % 256);
+            number = number / 256;
         }
         return b;
     }
 
-    static byte[] num2bytes(int number){
+    static byte[] num2bytes(int number) {
         return num2bytes(number, 4);
     }
 
-    static int randInt(int min, int max){
-        return ThreadLocalRandom.current().nextInt(max-min)+min;
+    static int randInt(int min, int max) {
+        return ThreadLocalRandom.current().nextInt(max - min) + min;
     }
 
-    static int div(Random rand, byte src){
-        return Math.round(rand.nextFloat()*2*src-src);
+    static int div(Random rand, byte src) {
+        return Math.round(rand.nextFloat() * 2 * src - src);
     }
 }

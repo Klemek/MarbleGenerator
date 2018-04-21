@@ -29,7 +29,7 @@ class WallpaperGenerator {
         makeWallpaper(file, width, height, size);
     }
 
-    static Dimension getScreenSizes() {
+    private static Dimension getScreenSizes() {
         Dimension dim = new Dimension(0, 0);
         for (GraphicsDevice gd : GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()) {
             dim.width = Math.max(dim.width, gd.getDisplayMode().getWidth());
@@ -38,7 +38,7 @@ class WallpaperGenerator {
         return dim;
     }
 
-    static void makeWallpaper(String name, int width, int height, int size) {
+    private static void makeWallpaper(String name, int width, int height, int size) {
         System.out.println("Making wallpaper '" + name + "' " + width + "x" + height + "px");
 
         File bmpFile = new File(name + ".bmp");
@@ -56,12 +56,12 @@ class WallpaperGenerator {
         System.out.println("\tData writing done in " + (System.currentTimeMillis() - t1) + " ms");
 
         t1 = System.currentTimeMillis();
-        if(!ImageUtils.saveBmpFile(file, bmpFile))
+        if (!ImageUtils.saveBmpFile(file, bmpFile))
             return;
         System.out.println("\tFile writing done in " + (System.currentTimeMillis() - t1) + " ms");
 
         t1 = System.currentTimeMillis();
-        if(!ImageUtils.convertBmpToJpg(bmpFile, outputFile))
+        if (!ImageUtils.convertBmpToJpg(bmpFile, outputFile))
             return;
         System.out.println("\tFile converting done in " + (System.currentTimeMillis() - t1) + " ms");
 

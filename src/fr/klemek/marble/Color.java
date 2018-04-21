@@ -7,7 +7,7 @@ class Color {
     final byte g;
     final byte b;
 
-    Color(byte r, byte g, byte b) {
+    private Color(byte r, byte g, byte b) {
         this.r = r;
         this.g = g;
         this.b = b;
@@ -19,7 +19,7 @@ class Color {
         this.b = (byte) b;
     }
 
-    static Color fromRgb(int r, int g, int b){
+    static Color fromRgb(int r, int g, int b) {
         return new Color(r + Byte.MIN_VALUE, g + Byte.MIN_VALUE, b + Byte.MIN_VALUE);
     }
 
@@ -28,18 +28,6 @@ class Color {
                 Utils.randomByte(rand),
                 Utils.randomByte(rand),
                 Utils.randomByte(rand));
-    }
-
-    Color plus(Color other) {
-        return new Color(Utils.bound((short) r + other.r),
-                Utils.bound((short) g + other.g),
-                Utils.bound((short) b + other.b));
-    }
-
-    Color times(float factor) {
-        return new Color((byte) (r * factor),
-                (byte) (g * factor),
-                (byte) (b * factor));
     }
 
     static Color add(float[] factors, Color[] colors) {
@@ -51,7 +39,7 @@ class Color {
             g += factors[i] * colors[i].g;
             b += factors[i] * colors[i].b;
         }
-        return new Color(Utils.bound(Math.round(r)),Utils.bound(Math.round(g)), Utils.bound(Math.round(b)));
+        return new Color(Utils.bound(Math.round(r)), Utils.bound(Math.round(g)), Utils.bound(Math.round(b)));
     }
 
     static Color add(Color... colors) {
