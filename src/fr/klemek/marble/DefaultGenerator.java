@@ -2,6 +2,7 @@ package fr.klemek.marble;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Level;
 
 class DefaultGenerator extends Generator {
 
@@ -38,14 +39,15 @@ class DefaultGenerator extends Generator {
     void generate() {
         if (seed == 0L)
             seed = ThreadLocalRandom.current().nextLong();
-        System.out.println("\t\tseed : " + seed);
-        System.out.println("\t\tsize : " + size);
-        System.out.println("\t\tslope : " + slope);
-        System.out.println("\t\tdivergence : " + divergence + " = " + divergence.sum());
+        Logger.log(Level.INFO, "Generating....");
+        Logger.log(Level.INFO, "\tseed : {0}", seed);
+        Logger.log(Level.INFO, "\tsize : {0}", size);
+        Logger.log(Level.INFO, "\tslope : {0}", slope);
+        Logger.log(Level.INFO, "\tdivergence : {0} = {1}", divergence, divergence.sum());
         rand = new Random(seed);
         table = new Color[width2][height2];
         table[0][0] = source == null ? Color.random(rand) : source;
-        System.out.println("\t\tsource : " + source);
+        Logger.log(Level.INFO, "\tsource : {0}", source);
         for (int y = 0; y < height2; y++)
             generateLine(y);
     }

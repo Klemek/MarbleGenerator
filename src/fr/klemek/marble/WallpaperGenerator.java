@@ -4,10 +4,13 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.logging.Level;
 
 class WallpaperGenerator {
 
     public static void main(String[] args) {
+
+        Logger.init("logging.properties");
 
         String file = "wallpaper";
         Dimension screen = getScreenSizes();
@@ -41,7 +44,7 @@ class WallpaperGenerator {
     }
 
     private static void makeWallpaper(String name, int width, int height, int size) {
-        System.out.println("Making wallpaper '" + name + "' " + width + "x" + height + "px");
+        Logger.log(Level.INFO, "Making wallpaper '{0}' {1}x{2}px", name, width, height);
 
         File bmpFile = new File(name + ".bmp");
         File outputFile = new File(name + ".jpg");
@@ -50,30 +53,30 @@ class WallpaperGenerator {
         DefaultGenerator gen = size == 0 ? new DefaultGenerator(width, height) : new DefaultGenerator(width, height, size);
         long t1 = System.currentTimeMillis();
         gen.generate();
-        System.out.println("\tGeneration done in " + (System.currentTimeMillis() - t1) + " ms");
+        Logger.log(Level.INFO, "\tGeneration done in {0} ms", (System.currentTimeMillis() - t1));
 
         t1 = System.currentTimeMillis();
         byte[] file = ImageUtils.generateBmpFile(width, gen.getData());
-        System.out.println("\t\t" + file.length + " bytes");
-        System.out.println("\tData writing done in " + (System.currentTimeMillis() - t1) + " ms");
+        Logger.log(Level.INFO, "\t\tData : {0} bytes", file.length);
+        Logger.log(Level.INFO, "\tData writing done in {0} ms", (System.currentTimeMillis() - t1));
 
         t1 = System.currentTimeMillis();
         if (!ImageUtils.saveBmpFile(file, bmpFile))
             return;
-        System.out.println("\tFile writing done in " + (System.currentTimeMillis() - t1) + " ms");
+        Logger.log(Level.INFO, "\tFile '{0}' writing done in {1} ms", bmpFile, (System.currentTimeMillis() - t1));
 
         t1 = System.currentTimeMillis();
         if (!ImageUtils.convertBmpToJpg(bmpFile, outputFile))
             return;
-        System.out.println("\tFile converting done in " + (System.currentTimeMillis() - t1) + " ms");
+        Logger.log(Level.INFO, "\tFile '{0}' conversion to '{1}' done in {2} ms", bmpFile, outputFile, (System.currentTimeMillis() - t1));
 
         try {
             Files.delete(bmpFile.toPath());
-            System.out.println("\tFile '" + bmpFile.getName() + "' deleted");
+            Logger.log(Level.INFO, "\tFile '{0}' deleted", bmpFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.logError(e);
         }
 
-        System.out.println("Wallpaper done in " + (System.currentTimeMillis() - t0) + " ms");
+        Logger.log(Level.INFO, "Wallpaper done in {0} ms", (System.currentTimeMillis() - t0));
     }
 }

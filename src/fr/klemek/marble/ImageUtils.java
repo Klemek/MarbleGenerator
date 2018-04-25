@@ -69,7 +69,7 @@ final class ImageUtils {
             fos.write(data);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.logError(e);
             return false;
         }
     }
@@ -80,7 +80,7 @@ final class ImageUtils {
             ImageIO.write(inputImage, "JPG", jpgFile);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.logError(e);
             return false;
         }
     }

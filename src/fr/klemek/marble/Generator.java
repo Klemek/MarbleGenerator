@@ -2,6 +2,7 @@ package fr.klemek.marble;
 
 import java.io.File;
 import java.util.Random;
+import java.util.logging.Level;
 
 abstract class Generator {
 
@@ -57,7 +58,7 @@ abstract class Generator {
             for (int x = 0; x < width2; x++) {
                 for (int j = 0; j < Math.min(size, width - x * size); j++) {
                     if (k >= data.length) {
-                        System.err.println("\t\toverflow at x:" + x + " y:" + y + " j:" + j + " k:" + k);
+                        Logger.log(Level.SEVERE, "Overflow at x:{0} y:{1} j:{2} k:{3}", x, y, k, j);
                         return data;
                     }
                     data[k++] = table[x][y].r;

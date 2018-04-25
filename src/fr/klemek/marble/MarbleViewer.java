@@ -16,7 +16,7 @@ class MarbleViewer extends JFrame {
 
     private class Panel extends JPanel {
 
-        private transient final Generator generator;
+        private final transient Generator generator;
 
         Panel(Generator generator) {
             this.generator = generator;

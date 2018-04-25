@@ -84,4 +84,16 @@ final class Utils {
     static int div(Random rand, byte src) {
         return Math.round(rand.nextFloat() * 2 * src - src);
     }
+
+    /*
+     * Other utils
+     */
+
+    static String getCallingClassName(int stackLevel) {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        if (stackLevel >= stackTrace.length)
+            return null;
+        String[] source = stackTrace[stackLevel].getClassName().split("\\.");
+        return source[source.length - 1];
+    }
 }
