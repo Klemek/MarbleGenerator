@@ -5,7 +5,7 @@ import java.awt.*;
 
 class MarbleViewer extends JFrame {
 
-    public MarbleViewer(Generator generator) {
+    MarbleViewer(Generator generator) {
         this.setLocation(0, 0);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -16,7 +16,7 @@ class MarbleViewer extends JFrame {
 
     private class Panel extends JPanel {
 
-        private final Generator generator;
+        private transient final Generator generator;
 
         Panel(Generator generator) {
             this.generator = generator;

@@ -59,7 +59,7 @@ class Color {
         return r + g + b;
     }
 
-    public java.awt.Color toColor() {
+    java.awt.Color toColor() {
         return new java.awt.Color(r - Byte.MIN_VALUE, g - Byte.MIN_VALUE, b - Byte.MIN_VALUE);
     }
 
@@ -68,7 +68,7 @@ class Color {
         return toString(false);
     }
 
-    public String toString(boolean unsigned) {
+    private String toString(boolean unsigned) {
         return "(" + (unsigned ? r - Byte.MIN_VALUE : r) + "," + (unsigned ? g - Byte.MIN_VALUE : g) + "," + (unsigned ? b - Byte.MIN_VALUE : b) + ")";
     }
 }

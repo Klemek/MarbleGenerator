@@ -2,6 +2,8 @@ package fr.klemek.marble;
 
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 class WallpaperGenerator {
 
@@ -45,7 +47,7 @@ class WallpaperGenerator {
         File outputFile = new File(name + ".jpg");
 
         long t0 = System.currentTimeMillis();
-        Generator gen = size == 0 ? new Generator(width, height) : new Generator(width, height, size);
+        DefaultGenerator gen = size == 0 ? new DefaultGenerator(width, height) : new DefaultGenerator(width, height, size);
         long t1 = System.currentTimeMillis();
         gen.generate();
         System.out.println("\tGeneration done in " + (System.currentTimeMillis() - t1) + " ms");
@@ -65,8 +67,12 @@ class WallpaperGenerator {
             return;
         System.out.println("\tFile converting done in " + (System.currentTimeMillis() - t1) + " ms");
 
-        if (bmpFile.delete())
+        try {
+            Files.delete(bmpFile.toPath());
             System.out.println("\tFile '" + bmpFile.getName() + "' deleted");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Wallpaper done in " + (System.currentTimeMillis() - t0) + " ms");
     }

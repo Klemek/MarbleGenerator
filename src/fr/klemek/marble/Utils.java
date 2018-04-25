@@ -31,9 +31,7 @@ final class Utils {
 
     static byte[] subArray(byte[] array, int start, int stop) {
         byte[] out = new byte[stop - start];
-        for (int i = start; i < stop; i++) {
-            out[i - start] = array[i];
-        }
+        System.arraycopy(array, start, out, 0, stop - start);
         return out;
     }
 
@@ -55,9 +53,7 @@ final class Utils {
     }
 
     static void writeArray(byte[] out, byte[] data, int start, int stop, int padding) {
-        for (int i = 0; i < Math.min(stop, out.length) - start; i++) {
-            out[i + start] = data[i + padding];
-        }
+        System.arraycopy(data, padding, out, start, Math.min(stop, out.length) - start);
     }
 
     static void writeArray(byte[] out, byte[] data, int start, int padding) {
@@ -68,9 +64,9 @@ final class Utils {
         writeArray(out, data, start, 0);
     }
 
-    static byte[] num2bytes(int number, int nbyte) {
-        byte[] b = new byte[nbyte];
-        for (int i = 0; i < nbyte; i++) {
+    static byte[] num2bytes(int number, int nByte) {
+        byte[] b = new byte[nByte];
+        for (int i = 0; i < nByte; i++) {
             b[i] = (byte) (number % 256);
             number = number / 256;
         }
