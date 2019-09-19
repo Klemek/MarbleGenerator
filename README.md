@@ -1,5 +1,7 @@
 # MarbleGenerator
 
+## Need to be refactored to use maven
+
 Generate a marble-like pattern to use in wallpapers.
 
 Usage :
