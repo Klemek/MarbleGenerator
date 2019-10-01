@@ -1,3 +1,5 @@
+[![Scc Count Badge](https://sloc.xyz/github/klemek/marblegenerator/?category=code)](https://github.com/boyter/scc/#badges-beta)
+
 # MarbleGenerator
 
 ## Need to be refactored to use maven
