@@ -33,7 +33,7 @@ It gives you something like this :
 
 Generate a matrix of random 3-tuples as following :
 
-![0<R_{x,y,z}<1](https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5CLARGE%200%3CR_%7Bx%2Cy%2Cz%7D%3C1)
+![-1<R_{x,y,z}<1](https://latex.codecogs.com/svg.latex?%5Cdpi%7B150%7D%20%5CLARGE%20-1%3CR_%7Bx%2Cy%2Cz%7D%3C1)
 
 Initialize with a starting color, a slope vector and a variation vector :
 
